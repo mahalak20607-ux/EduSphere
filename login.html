@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="EduSphere Login - Smart Education Management System"
+    >
+
+    <title>Login | EduSphere</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =====================================================
+           EDUSPHERE LOGIN PAGE
+           ===================================================== */
+
+        body {
+            margin: 0;
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff 0%,
+                    #f8fafc 50%,
+                    #eef2ff 100%
+                );
+
+            min-height: 100vh;
+        }
+
+        .login-page {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= HEADER ================= */
+
+        .login-header {
+            height: 76px;
+
+            padding: 0 7%;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .login-logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            text-decoration: none;
+
+            color: #111827;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .login-logo-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 6px 15px rgba(
+                    79,
+                    70,
+                    229,
+                    0.25
+                );
+        }
+
+        .back-home {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .back-home:hover {
+            color: #4f46e5;
+        }
+
+        /* ================= MAIN ================= */
+
+        .login-main {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+
+            max-width: 1000px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 25px 60px
+                rgba(15, 23, 42, 0.10);
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .login-info {
+            position: relative;
+
+            padding: 55px 45px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #4f46e5,
+                    #3730a3
+                );
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+        .login-info::before {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.06
+            );
+
+            top: -90px;
+
+            right: -70px;
+        }
+
+        .login-info::after {
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            border-radius: 50%;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.05
+            );
+
+            bottom: -70px;
+
+            left: -60px;
+        }
+
+        .info-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .info-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.12
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.15
+            );
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.6px;
+        }
+
+        .login-info h1 {
+            font-size: 38px;
+
+            line-height: 1.15;
+
+            margin:
+                25px 0 15px;
+        }
+
+        .login-info > .info-content > p {
+            color: rgba(
+                255,
+                255,
+                255,
+                0.78
+            );
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            max-width: 390px;
+        }
+
+        .login-benefits {
+            margin-top: 35px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .benefit {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .benefit-icon {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 9px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.12
+            );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 15px;
+        }
+
+        .benefit-text strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+        .benefit-text span {
+            display: block;
+
+            font-size: 10px;
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.65
+            );
+
+            margin-top: 2px;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .login-form-section {
+            padding: 55px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading .label {
+            color: #4f46e5;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+        .form-heading h2 {
+            font-size: 27px;
+
+            margin:
+                7px 0 5px;
+
+            color: #111827;
+        }
+
+        .form-heading p {
+            color: #6b7280;
+
+            font-size: 12px;
+
+            margin: 0;
+        }
+
+        /* ================= FORM ================= */
+
+        .login-form {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .input-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .input-group label {
+            color: #374151;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 15px;
+
+            color: #9ca3af;
+
+            pointer-events: none;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+
+            height: 45px;
+
+            padding:
+                0 13px 0 40px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 9px;
+
+            background: #f9fafb;
+
+            color: #111827;
+
+            font-size: 12px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+
+            box-sizing: border-box;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            background: white;
+
+            border-color: #4f46e5;
+
+            box-shadow:
+                0 0 0 3px #eef2ff;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #6b7280;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .password-toggle:hover {
+            color: #4f46e5;
+        }
+
+        .form-options {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: -3px;
+        }
+
+        .remember-me {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #6b7280;
+
+            font-size: 10px;
+
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            accent-color: #4f46e5;
+
+            width: 13px;
+            height: 13px;
+        }
+
+        .forgot-password {
+            border: none;
+
+            background: transparent;
+
+            color: #4f46e5;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            padding: 0;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-button {
+            width: 100%;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 18px
+                rgba(79, 70, 229, 0.22);
+
+            transition: 0.25s ease;
+        }
+
+        .login-button:hover {
+            background: #3730a3;
+
+            transform:
+                translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 24px 0;
+        }
+
+        .divider span {
+            height: 1px;
+
+            flex: 1;
+
+            background: #e5e7eb;
+        }
+
+        .divider p {
+            margin: 0;
+
+            color: #9ca3af;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+        /* ================= DEMO LOGIN ================= */
+
+        .demo-box {
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: #f8fafc;
+
+            border: 1px solid #eef0f3;
+        }
+
+        .demo-box p {
+            margin: 0 0 7px;
+
+            color: #6b7280;
+
+            font-size: 9px;
+        }
+
+        .demo-credentials {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .demo-credentials span {
+            color: #374151;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .login-message {
+            display: none;
+
+            padding: 10px 12px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            margin-bottom: 5px;
+        }
+
+        .login-message.error {
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
+        }
+
+        .login-message.success {
+            display: block;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border: 1px solid #bbf7d0;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .login-footer {
+            text-align: center;
+
+            padding: 18px;
+
+            color: #9ca3af;
+
+            font-size: 9px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+            .login-info {
+                display: none;
+            }
+
+            .login-form-section {
+                padding: 45px 40px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .login-header {
+                padding: 0 20px;
+
+                height: 68px;
+            }
+
+            .login-main {
+                padding: 25px 15px;
+            }
+
+            .login-form-section {
+                padding: 35px 23px;
+            }
+
+            .form-heading h2 {
+                font-size: 24px;
+            }
+
+            .form-options {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .login-footer {
+                padding-bottom: 12px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="login-page">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="login-header">
+
+            <a
+                href="index.html"
+                class="login-logo"
+            >
+
+                <span class="login-logo-icon">
+                    E
+                </span>
+
+                <span>
+                    EduSphere
+                </span>
+
+            </a>
+
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+        </header>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="login-main">
+
+            <div class="login-wrapper">
+
+                <!-- ================= LEFT ================= -->
+
+                <section class="login-info">
+
+                    <div class="info-content">
+
+                        <span class="info-badge">
+                            ✦ EDUSPHERE PORTAL
+                        </span>
+
+
+                        <h1>
+                            Welcome back.
+                        </h1>
+
+
+                        <p>
+                            Access your personalized
+                            education dashboard and manage
+                            your academic activities from
+                            one secure platform.
+                        </p>
+
+
+                        <div class="login-benefits">
+
+                            <div class="benefit">
+
+                                <div class="benefit-icon">
+                                    📊
+                                </div>
+
+                                <div class="benefit-text">
+
+                                    <strong>
+                                        Smart Dashboard
+                                    </strong>
+
+                                    <span>
+                                        View your academic information
+                                        at a glance.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="benefit">
+
+                                <div class="benefit-icon">
+                                    📚
+                                </div>
+
+                                <div class="benefit-text">
+
+                                    <strong>
+                                        Academic Management
+                                    </strong>
+
+                                    <span>
+                                        Access courses, marks and
+                                        attendance easily.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="benefit">
+
+                                <div class="benefit-icon">
+                                    🔐
+                                </div>
+
+                                <div class="benefit-text">
+
+                                    <strong>
+                                        Secure Access
+                                    </strong>
+
+                                    <span>
+                                        Your account information stays
+                                        protected.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= FORM ================= -->
+
+                <section class="login-form-section">
+
+                    <div class="form-heading">
+
+                        <span class="label">
+                            ACCOUNT LOGIN
+                        </span>
+
+                        <h2>
+                            Welcome back
+                        </h2>
+
+                        <p>
+                            Enter your credentials to continue
+                            to EduSphere.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                    ></div>
+
+
+                    <form
+                        id="loginForm"
+                        class="login-form"
+                    >
+
+                        <!-- EMAIL -->
+
+                        <div class="input-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    ✉
+                                </span>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="input-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    🔒
+                                </span>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="togglePassword"
+                                    aria-label="Show password"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPTIONS -->
+
+                        <div class="form-options">
+
+                            <label class="remember-me">
+
+                                <input
+                                    type="checkbox"
+                                    id="rememberMe"
+                                >
+
+                                Remember me
+
+                            </label>
+
+
+                            <button
+                                type="button"
+                                class="forgot-password"
+                                id="forgotPassword"
+                            >
+                                Forgot password?
+                            </button>
+
+                        </div>
+
+
+                        <!-- LOGIN -->
+
+                        <button
+                            type="submit"
+                            class="login-button"
+                            id="loginButton"
+                        >
+                            Sign In to EduSphere
+                        </button>
+
+                    </form>
+
+
+                    <!-- DIVIDER -->
+
+                    <div class="divider">
+
+                        <span></span>
+
+                        <p>
+                            Demo Access
+                        </p>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- DEMO CREDENTIALS -->
+
+                    <div class="demo-box">
+
+                        <p>
+                            For project demonstration:
+                        </p>
+
+                        <div class="demo-credentials">
+
+                            <span>
+                                Email: admin@edusphere.com
+                            </span>
+
+                            <span>
+                                Password: admin123
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="login-footer">
+
+            © 2026 EduSphere. All rights reserved.
+
+        </footer>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const forgotPassword =
+            document.getElementById("forgotPassword");
+
+
+        /* =========================
+           PASSWORD VISIBILITY
+           ========================= */
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           LOGIN
+           ========================= */
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const password =
+                    passwordInput.value;
+
+
+                loginMessage.className =
+                    "login-message";
+
+                loginMessage.textContent =
+                    "";
+
+
+                /* Demo credentials */
+
+                const validEmail =
+                    "admin@edusphere.com";
+
+                const validPassword =
+                    "admin123";
+
+
+                if (
+                    email === validEmail &&
+                    password === validPassword
+                ) {
+
+                    loginButton.disabled =
+                        true;
+
+                    loginButton.textContent =
+                        "Signing in...";
+
+
+                    loginMessage.textContent =
+                        "Login successful. Redirecting...";
+
+                    loginMessage.classList.add(
+                        "success"
+                    );
+
+
+                    localStorage.setItem(
+                        "edusphereLoggedIn",
+                        "true"
+                    );
+
+
+                    localStorage.setItem(
+                        "edusphereUser",
+                        JSON.stringify({
+                            name: "Admin User",
+                            email: email,
+                            role: "Administrator"
+                        })
+                    );
+
+
+                    if (
+                        document.getElementById(
+                            "rememberMe"
+                        ).checked
+                    ) {
+
+                        localStorage.setItem(
+                            "edusphereRemember",
+                            "true"
+                        );
+
+                    }
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        700
+                    );
+
+                } else {
+
+                    loginMessage.textContent =
+                        "Invalid email or password. Please try again.";
+
+                    loginMessage.classList.add(
+                        "error"
+                    );
+
+                    passwordInput.value = "";
+
+                    passwordInput.focus();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           FORGOT PASSWORD
+           ========================= */
+
+        forgotPassword.addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "Please contact your administrator to reset your password."
+                );
+
+            }
+        );
+
+
+        /* =========================
+           PREVENT ALREADY LOGGED-IN
+           ========================= */
+
+        const alreadyLoggedIn =
+            localStorage.getItem(
+                "edusphereLoggedIn"
+            );
+
+
+        if (alreadyLoggedIn === "true") {
+
+            // User can still see the login page,
+            // but dashboard remains available.
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+/* =========================
+   BACKEND LOGIN
+   ========================= */
+
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+
+    loginMessage.className = "login-message";
+    loginMessage.textContent = "";
+
+    if (!email || !password) {
+        loginMessage.textContent =
+            "Please enter your email and password.";
+        loginMessage.classList.add("error");
+        return;
+    }
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in...";
+
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            loginMessage.textContent =
+                "Login successful. Redirecting...";
+
+            loginMessage.classList.add("success");
+
+            // Save login information
+            localStorage.setItem(
+                "edusphereLoggedIn",
+                "true"
+            );
+
+            localStorage.setItem(
+                "edusphereUser",
+                JSON.stringify(data.user)
+            );
+
+            // Remember me
+            if (
+                document.getElementById("rememberMe").checked
+            ) {
+                localStorage.setItem(
+                    "edusphereRemember",
+                    "true"
+                );
+            }
+
+            setTimeout(function () {
+                window.location.href = "dashboard.html";
+            }, 700);
+
+        } else {
+
+            loginMessage.textContent =
+                data.message || "Invalid email or password.";
+
+            loginMessage.classList.add("error");
+
+            passwordInput.value = "";
+            passwordInput.focus();
+
+            loginButton.disabled = false;
+            loginButton.textContent =
+                "Sign In to EduSphere";
+        }
+
+    } catch (error) {
+
+        console.error("Login Error:", error);
+
+        loginMessage.textContent =
+            "Unable to connect to the EduSphere server.";
+
+        loginMessage.classList.add("error");
+
+        loginButton.disabled = false;
+        loginButton.textContent =
+            "Sign In to EduSphere";
+    }
+});

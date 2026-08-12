@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance | EduSphere</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout button:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .profile span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .page-heading p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        .date-box {
+            padding: 10px 13px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            font-size: 10px;
+            color: #4b5563;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .stat span {
+            display: block;
+            color: #6b7280;
+            font-size: 9px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 22px;
+            margin-top: 4px;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            padding: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .card-header span {
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= OVERVIEW ================= */
+
+        .attendance-overview {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .circle {
+            width: 155px;
+            height: 155px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4f46e5 0deg 338deg,
+                #e5e7eb 338deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle-inner {
+            width: 118px;
+            height: 118px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle-inner strong {
+            font-size: 28px;
+        }
+
+        .circle-inner span {
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        .attendance-list {
+            flex: 1;
+        }
+
+        .attendance-row {
+            margin-bottom: 15px;
+        }
+
+        .attendance-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .attendance-row-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .attendance-row-top span {
+            font-size: 9px;
+        }
+
+        .attendance-row-top strong {
+            font-size: 9px;
+        }
+
+        .bar {
+            height: 7px;
+            background: #eef0f3;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: #4f46e5;
+            border-radius: inherit;
+        }
+
+        /* ================= QUICK SUMMARY ================= */
+
+        .summary-box {
+            text-align: center;
+        }
+
+        .summary-number {
+            font-size: 35px;
+            font-weight: 800;
+            margin: 15px 0 3px;
+        }
+
+        .summary-label {
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        .summary-status {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .summary-details {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-detail {
+            padding: 10px 5px;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .summary-detail strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .summary-detail span {
+            color: #9ca3af;
+            font-size: 7px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .filter {
+            padding: 8px 11px;
+            border: 1px solid #e5e7eb;
+            border-radius: 7px;
+            font-size: 9px;
+            color: #4b5563;
+            background: white;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 12px 20px;
+            text-align: left;
+            background: #f8fafc;
+            color: #6b7280;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        td {
+            padding: 14px 20px;
+            border-top: 1px solid #f0f1f3;
+            font-size: 9px;
+            color: #4b5563;
+        }
+
+        .course-name {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .percentage {
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .good {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .warning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .attendance-overview {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div class="brand-name">EduSphere</div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html" class="active">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+        </nav>
+
+        <div class="menu-title">ACCOUNT</div>
+
+        <nav class="nav">
+
+            <a href="profile.html">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <button onclick="logout()">
+                ⇥ &nbsp; Sign Out
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Attendance</h1>
+                <p>Track and monitor student attendance</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Attendance Management</h2>
+
+                    <p>
+                        Monitor attendance records and
+                        identify students who need attention.
+                    </p>
+                </div>
+
+                <div class="date-box">
+                    📅 August 2026
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon">✓</div>
+
+                    <span>Average Attendance</span>
+
+                    <strong>96%</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">👨‍🎓</div>
+
+                    <span>Total Students</span>
+
+                    <strong>1,250</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">🟢</div>
+
+                    <span>Present Today</span>
+
+                    <strong>1,185</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">🔴</div>
+
+                    <span>Absent Today</span>
+
+                    <strong>65</strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- OVERVIEW -->
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Attendance Overview
+                        </h3>
+
+                        <span>
+                            Current Academic Year
+                        </span>
+
+                    </div>
+
+
+                    <div class="attendance-overview">
+
+                        <div class="circle">
+
+                            <div class="circle-inner">
+
+                                <strong>96%</strong>
+
+                                <span>Overall</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="attendance-list">
+
+                            <div class="attendance-row">
+
+                                <div class="attendance-row-top">
+
+                                    <span>
+                                        Computer Science
+                                    </span>
+
+                                    <strong>97%</strong>
+
+                                </div>
+
+                                <div class="bar">
+                                    <span style="width:97%;"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="attendance-row">
+
+                                <div class="attendance-row-top">
+
+                                    <span>
+                                        Information Technology
+                                    </span>
+
+                                    <strong>95%</strong>
+
+                                </div>
+
+                                <div class="bar">
+                                    <span style="width:95%;"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="attendance-row">
+
+                                <div class="attendance-row-top">
+
+                                    <span>
+                                        Electronics
+                                    </span>
+
+                                    <strong>94%</strong>
+
+                                </div>
+
+                                <div class="bar">
+                                    <span style="width:94%;"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="attendance-row">
+
+                                <div class="attendance-row-top">
+
+                                    <span>
+                                        Mechanical
+                                    </span>
+
+                                    <strong>92%</strong>
+
+                                </div>
+
+                                <div class="bar">
+                                    <span style="width:92%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Today's Summary
+                        </h3>
+
+                        <span>
+                            12 Aug 2026
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+                        <div class="summary-number">
+                            94.8%
+                        </div>
+
+                        <div class="summary-label">
+                            Attendance today
+                        </div>
+
+                        <div class="summary-status">
+                            Good Attendance
+                        </div>
+
+
+                        <div class="summary-details">
+
+                            <div class="summary-detail">
+
+                                <strong>1,185</strong>
+
+                                <span>
+                                    Present
+                                </span>
+
+                            </div>
+
+                            <div class="summary-detail">
+
+                                <strong>65</strong>
+
+                                <span>
+                                    Absent
+                                </span>
+
+                            </div>
+
+                            <div class="summary-detail">
+
+                                <strong>1,250</strong>
+
+                                <span>
+                                    Total
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-card">
+
+                <div class="table-header">
+
+                    <h3>
+                        Course-wise Attendance
+                    </h3>
+
+                    <select class="filter">
+
+                        <option>
+                            All Courses
+                        </option>
+
+                        <option>
+                            Artificial Intelligence
+                        </option>
+
+                        <option>
+                            Data Structures
+                        </option>
+
+                        <option>
+                            Database Management
+                        </option>
+
+                        <option>
+                            Operating Systems
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Course</th>
+
+                                <th>Total Classes</th>
+
+                                <th>Present</th>
+
+                                <th>Absent</th>
+
+                                <th>Attendance</th>
+
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td class="course-name">
+                                    Artificial Intelligence
+                                </td>
+
+                                <td>42</td>
+
+                                <td>40</td>
+
+                                <td>2</td>
+
+                                <td class="percentage">
+                                    95.2%
+                                </td>
+
+                                <td>
+                                    <span class="status good">
+                                        Good
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td class="course-name">
+                                    Data Structures
+                                </td>
+
+                                <td>40</td>
+
+                                <td>38</td>
+
+                                <td>2</td>
+
+                                <td class="percentage">
+                                    95%
+                                </td>
+
+                                <td>
+                                    <span class="status good">
+                                        Good
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td class="course-name">
+                                    Database Management
+                                </td>
+
+                                <td>38</td>
+
+                                <td>35</td>
+
+                                <td>3</td>
+
+                                <td class="percentage">
+                                    92.1%
+                                </td>
+
+                                <td>
+                                    <span class="status good">
+                                        Good
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td class="course-name">
+                                    Operating Systems
+                                </td>
+
+                                <td>36</td>
+
+                                <td>32</td>
+
+                                <td>4</td>
+
+                                <td class="percentage">
+                                    88.9%
+                                </td>
+
+                                <td>
+                                    <span class="status warning">
+                                        Monitor
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    function logout() {
+
+        if (
+            confirm(
+                "Are you sure you want to sign out?"
+            )
+        ) {
+
+            localStorage.removeItem(
+                "edusphereLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "edusphereUser"
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduSphere | Smart Education Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            color: #111827;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            height: 76px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .logo-box {
+            width: 43px;
+            height: 43px;
+            border-radius: 11px;
+            background: #5146e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(81, 70, 229, 0.22);
+        }
+
+        .logo-text {
+            font-size: 21px;
+            font-weight: 800;
+            color: #172033;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #5146e5;
+        }
+
+        .nav-links .login-link {
+            color: #5146e5;
+        }
+
+        .get-started {
+            background: #5146e5;
+            color: white !important;
+            padding: 12px 20px;
+            border-radius: 9px;
+            box-shadow: 0 7px 18px rgba(81, 70, 229, 0.2);
+        }
+
+        .get-started:hover {
+            background: #4038c9;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+            background: #f8fafc;
+            padding: 72px 7% 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+        }
+
+        .hero-label::before {
+            content: "✦";
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 5vw, 72px);
+            line-height: 1.03;
+            letter-spacing: -2.5px;
+            color: #111827;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #5146e5;
+        }
+
+        .hero-description {
+            max-width: 610px;
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+        }
+
+        .primary-btn {
+            background: #5146e5;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 9px 20px rgba(81, 70, 229, 0.22);
+            transition: 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            background: #4038c9;
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #1f2937;
+            padding: 14px 22px;
+            border-radius: 9px;
+            border: 1px solid #e2e8f0;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .secondary-btn:hover {
+            border-color: #c7d2fe;
+            color: #5146e5;
+        }
+
+        /* ================= DASHBOARD PREVIEW ================= */
+
+        .hero-visual {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*
+            IMPORTANT:
+            No animation is applied to this card.
+            It will remain completely stable.
+        */
+
+        .dashboard-preview {
+            width: 100%;
+            max-width: 570px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 25px 55px rgba(15, 23, 42, 0.10);
+            position: relative;
+        }
+
+        .preview-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .preview-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #16a34a;
+        }
+
+        .preview-title strong {
+            font-size: 13px;
+            color: #111827;
+        }
+
+        .preview-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #5146e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .preview-content {
+            padding-top: 25px;
+        }
+
+        .welcome-text {
+            font-size: 9px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .preview-content h2 {
+            font-size: 19px;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        /* STAT CARDS */
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .preview-stat {
+            background: #f8fafc;
+            border: 1px solid #edf0f4;
+            border-radius: 10px;
+            padding: 15px 12px;
+        }
+
+        .preview-stat p {
+            color: #64748b;
+            font-size: 8px;
+            margin-bottom: 7px;
+        }
+
+        .preview-stat strong {
+            color: #111827;
+            font-size: 19px;
+        }
+
+        /* CHART */
+
+        .chart-box {
+            border: 1px solid #e8edf3;
+            border-radius: 12px;
+            padding: 17px;
+            margin-bottom: 14px;
+        }
+
+        .chart-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .chart-heading strong {
+            font-size: 10px;
+        }
+
+        .chart-heading span {
+            color: #94a3b8;
+            font-size: 8px;
+        }
+
+        .chart {
+            height: 140px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 12px;
+            padding: 10px 5px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .bar {
+            width: 28px;
+            background: #6366f1;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .bar:nth-child(1) {
+            height: 55%;
+        }
+
+        .bar:nth-child(2) {
+            height: 70%;
+        }
+
+        .bar:nth-child(3) {
+            height: 62%;
+        }
+
+        .bar:nth-child(4) {
+            height: 82%;
+        }
+
+        .bar:nth-child(5) {
+            height: 75%;
+        }
+
+        .bar:nth-child(6) {
+            height: 92%;
+        }
+
+        .bar:nth-child(7) {
+            height: 83%;
+        }
+
+        /* PREVIEW BOTTOM */
+
+        .preview-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bottom-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .bottom-card p {
+            color: #94a3b8;
+            font-size: 8px;
+            margin-bottom: 7px;
+        }
+
+        .bottom-card strong {
+            font-size: 16px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 5px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            margin-top: 9px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            width: 96%;
+            background: #5146e5;
+            border-radius: 10px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            padding: 90px 7%;
+            background: white;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+        }
+
+        .section-label {
+            color: #5146e5;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-size: 38px;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            max-width: 1120px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 25px;
+            background: white;
+            transition: 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #c7d2fe;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            font-size: 15px;
+            margin-bottom: 9px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            padding: 90px 7%;
+            background: #f8fafc;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .about p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .about-list li {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .about-list li::before {
+            content: "✓";
+            color: #5146e5;
+            font-weight: 800;
+            margin-right: 9px;
+        }
+
+        .about-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .about-number {
+            font-size: 45px;
+            font-weight: 800;
+            color: #5146e5;
+            margin-bottom: 5px;
+        }
+
+        .about-card p {
+            margin-bottom: 22px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .about-stat {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .about-stat strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .about-stat span {
+            color: #94a3b8;
+            font-size: 9px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            padding: 90px 7%;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-container h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .contact-container > p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 35px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .contact-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .contact-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .contact-card h3 {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .contact-card p {
+            color: #64748b;
+            font-size: 10px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 28px 7%;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-brand {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .footer-text {
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 55px;
+            }
+
+            .hero-content {
+                margin: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                margin-top: 15px;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a:not(.login-link):not(.get-started) {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 5%;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .dashboard-preview {
+                padding: 17px;
+            }
+
+            .preview-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2,
+            .about h2,
+            .contact-container h2 {
+                font-size: 30px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .logo-text {
+                font-size: 17px;
+            }
+
+            .get-started {
+                padding: 9px 12px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .chart {
+                gap: 5px;
+            }
+
+            .bar {
+                width: 20px;
+            }
+
+            .preview-bottom {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-box">
+                E
+            </div>
+
+            <div class="logo-text">
+                EduSphere
+            </div>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+            <a href="login.html" class="login-link">
+                Login
+            </a>
+
+            <a href="login.html" class="get-started">
+                Get Started
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                SMART EDUCATION MANAGEMENT
+            </div>
+
+            <h1>
+                Manage Education
+                <br>
+                <span>Smarter with</span>
+                <br>
+                EduSphere
+            </h1>
+
+            <p class="hero-description">
+                A modern education management platform designed
+                to connect students, faculty and administrators
+                in one simple and powerful system.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="login.html" class="primary-btn">
+                    Get Started →
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= DASHBOARD PREVIEW ================= -->
+
+        <div class="hero-visual">
+
+            <div class="dashboard-preview">
+
+                <div class="preview-top">
+
+                    <div class="preview-title">
+
+                        <span class="status-dot"></span>
+
+                        <strong>
+                            EduSphere Dashboard
+                        </strong>
+
+                    </div>
+
+                    <div class="preview-avatar">
+                        A
+                    </div>
+
+                </div>
+
+
+                <div class="preview-content">
+
+                    <p class="welcome-text">
+                        Welcome back
+                    </p>
+
+                    <h2>
+                        Education Dashboard
+                    </h2>
+
+
+                    <!-- STATS -->
+
+                    <div class="preview-stats">
+
+                        <div class="preview-stat">
+
+                            <p>
+                                Students
+                            </p>
+
+                            <strong>
+                                1,250
+                            </strong>
+
+                        </div>
+
+                        <div class="preview-stat">
+
+                            <p>
+                                Courses
+                            </p>
+
+                            <strong>
+                                48
+                            </strong>
+
+                        </div>
+
+                        <div class="preview-stat">
+
+                            <p>
+                                Attendance
+                            </p>
+
+                            <strong>
+                                96%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CHART -->
+
+                    <div class="chart-box">
+
+                        <div class="chart-heading">
+
+                            <strong>
+                                Academic Overview
+                            </strong>
+
+                            <span>
+                                2026
+                            </span>
+
+                        </div>
+
+                        <div class="chart">
+
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTTOM -->
+
+                    <div class="preview-bottom">
+
+                        <div class="bottom-card">
+
+                            <p>
+                                Overall Attendance
+                            </p>
+
+                            <strong>
+                                96%
+                            </strong>
+
+                            <div class="progress">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="bottom-card">
+
+                            <p>
+                                Average Performance
+                            </p>
+
+                            <strong>
+                                86.4%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features" id="features">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                OUR FEATURES
+            </div>
+
+            <h2>
+                Everything You Need
+                in One Platform
+            </h2>
+
+            <p>
+                EduSphere provides essential tools for
+                managing academic activities efficiently.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👨‍🎓
+                </div>
+
+                <h3>
+                    Student Management
+                </h3>
+
+                <p>
+                    Manage student information, profiles,
+                    academic details and performance.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Course Management
+                </h3>
+
+                <p>
+                    Organize courses, subjects and academic
+                    information in one place.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Attendance Tracking
+                </h3>
+
+                <p>
+                    Track attendance records and monitor
+                    student participation easily.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Marks & Results
+                </h3>
+
+                <p>
+                    Record marks, calculate performance
+                    and manage academic results.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👩‍🏫
+                </div>
+
+                <h3>
+                    Faculty Management
+                </h3>
+
+                <p>
+                    Manage faculty profiles, departments,
+                    courses and academic responsibilities.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Secure Access
+                </h3>
+
+                <p>
+                    Role-based access helps keep student,
+                    faculty and administrative data secure.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+        <div class="about-container">
+
+            <div>
+
+                <div class="section-label">
+                    ABOUT EDUSPHERE
+                </div>
+
+                <h2>
+                    Built for Modern Education
+                </h2>
+
+                <p>
+                    EduSphere brings important academic
+                    management activities together in one
+                    centralized platform.
+                </p>
+
+                <p>
+                    Students, faculty and administrators can
+                    access the information they need through
+                    a simple and organized interface.
+                </p>
+
+
+                <ul class="about-list">
+
+                    <li>
+                        Centralized academic management
+                    </li>
+
+                    <li>
+                        Easy student and faculty access
+                    </li>
+
+                    <li>
+                        Organized courses and results
+                    </li>
+
+                    <li>
+                        Simple and professional dashboard
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-number">
+                    1,250+
+                </div>
+
+                <p>
+                    Students managed through the
+                    EduSphere platform.
+                </p>
+
+
+                <div class="about-stats">
+
+                    <div class="about-stat">
+
+                        <strong>
+                            48
+                        </strong>
+
+                        <span>
+                            Courses
+                        </span>
+
+                    </div>
+
+
+                    <div class="about-stat">
+
+                        <strong>
+                            96%
+                        </strong>
+
+                        <span>
+                            Attendance
+                        </span>
+
+                    </div>
+
+
+                    <div class="about-stat">
+
+                        <strong>
+                            50+
+                        </strong>
+
+                        <span>
+                            Faculty
+                        </span>
+
+                    </div>
+
+
+                    <div class="about-stat">
+
+                        <strong>
+                            24/7
+                        </strong>
+
+                        <span>
+                            Access
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <div class="contact-container">
+
+            <div class="section-label">
+                CONTACT US
+            </div>
+
+            <h2>
+                Get in Touch
+            </h2>
+
+            <p>
+                Have questions about EduSphere?
+                Our team is here to help.
+            </p>
+
+
+            <div class="contact-grid">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📧
+                    </div>
+
+                    <h3>
+                        Email
+                    </h3>
+
+                    <p>
+                        support@edusphere.com
+                    </p>
+
+                </div>
+
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📞
+                    </div>
+
+                    <h3>
+                        Phone
+                    </h3>
+
+                    <p>
+                        +91 98765 43210
+                    </p>
+
+                </div>
+
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        Location
+                    </h3>
+
+                    <p>
+                        Chennai, Tamil Nadu
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                EduSphere
+            </div>
+
+            <div class="footer-text">
+                © 2026 EduSphere. Smart Education Management System.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+         * EduSphere Home Page
+         * No floating/shaking animation is used.
+         */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const dashboard =
+                document.querySelector(".dashboard-preview");
+
+            if (dashboard) {
+                dashboard.style.animation = "none";
+                dashboard.style.transform = "none";
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

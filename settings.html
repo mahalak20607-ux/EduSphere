@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | EduSphere</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            inset: 0 auto 0 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout button:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .top-profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .top-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .top-profile strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .top-profile span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .page-heading p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        /* ================= SETTINGS LAYOUT ================= */
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 18px;
+        }
+
+        .settings-menu {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            padding: 10px;
+            height: fit-content;
+        }
+
+        .settings-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            text-align: left;
+            padding: 11px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .settings-menu button:hover,
+        .settings-menu button.active {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .settings-content {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            padding: 20px;
+        }
+
+        .card-header {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f1f3;
+            margin-bottom: 16px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .card-header p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        /* ================= SETTING ROW ================= */
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info strong {
+            display: block;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .setting-info span {
+            display: block;
+            color: #9ca3af;
+            font-size: 8px;
+            max-width: 500px;
+        }
+
+        /* ================= TOGGLE ================= */
+
+        .switch {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #d1d5db;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: .2s;
+        }
+
+        .switch input:checked + .slider {
+            background: #4f46e5;
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(18px);
+        }
+
+        /* ================= SELECT ================= */
+
+        .setting-select {
+            padding: 8px 10px;
+            min-width: 130px;
+            border: 1px solid #e5e7eb;
+            border-radius: 7px;
+            outline: none;
+            font-size: 9px;
+            color: #374151;
+            background: white;
+        }
+
+        /* ================= PASSWORD ================= */
+
+        .password-btn {
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #4f46e5;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .password-btn:hover {
+            background: #eef2ff;
+        }
+
+        /* ================= DANGER ================= */
+
+        .danger-card {
+            border-color: #fecaca;
+        }
+
+        .danger-card .card-header h3 {
+            color: #dc2626;
+        }
+
+        .danger-btn {
+            border: 1px solid #fecaca;
+            background: #fff;
+            color: #dc2626;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .danger-btn:hover {
+            background: #fef2f2;
+        }
+
+        .save-area {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2px;
+        }
+
+        .save-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #3730a3;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-menu {
+                display: flex;
+                overflow-x: auto;
+            }
+
+            .settings-menu button {
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .setting-row {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div class="brand-name">EduSphere</div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+        </nav>
+
+        <div class="menu-title">ACCOUNT</div>
+
+        <nav class="nav">
+
+            <a href="profile.html">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html" class="active">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <button onclick="logout()">
+                ⇥ &nbsp; Sign Out
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Settings</h1>
+                <p>Customize your EduSphere experience</p>
+            </div>
+
+            <div class="top-profile">
+
+                <div class="top-avatar">A</div>
+
+                <div>
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <div class="page-heading">
+
+                <h2>System Settings</h2>
+
+                <p>
+                    Manage preferences, notifications,
+                    security and account settings.
+                </p>
+
+            </div>
+
+
+            <div class="settings-layout">
+
+                <!-- ================= SETTINGS MENU ================= -->
+
+                <div class="settings-menu">
+
+                    <button
+                        class="active"
+                        onclick="showSection('general', this)">
+                        ⚙ General
+                    </button>
+
+                    <button
+                        onclick="showSection('notifications', this)">
+                        🔔 Notifications
+                    </button>
+
+                    <button
+                        onclick="showSection('security', this)">
+                        🔒 Security
+                    </button>
+
+                    <button
+                        onclick="showSection('privacy', this)">
+                        🛡 Privacy
+                    </button>
+
+                </div>
+
+
+                <!-- ================= SETTINGS CONTENT ================= -->
+
+                <div class="settings-content">
+
+
+                    <!-- GENERAL -->
+
+                    <div class="card settings-section" id="general">
+
+                        <div class="card-header">
+
+                            <h3>
+                                General Preferences
+                            </h3>
+
+                            <p>
+                                Configure your basic EduSphere preferences.
+                            </p>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Language
+                                </strong>
+
+                                <span>
+                                    Choose the language used throughout the dashboard.
+                                </span>
+
+                            </div>
+
+                            <select class="setting-select">
+
+                                <option>
+                                    English
+                                </option>
+
+                                <option>
+                                    Tamil
+                                </option>
+
+                                <option>
+                                    Hindi
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Time Zone
+                                </strong>
+
+                                <span>
+                                    Set the time zone used for schedules and notifications.
+                                </span>
+
+                            </div>
+
+                            <select class="setting-select">
+
+                                <option>
+                                    IST (UTC +5:30)
+                                </option>
+
+                                <option>
+                                    UTC
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Compact Dashboard
+                                </strong>
+
+                                <span>
+                                    Use a more compact layout to display additional information.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="compactMode">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Auto Save
+                                </strong>
+
+                                <span>
+                                    Automatically save changes made to your settings.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <div
+                        class="card settings-section"
+                        id="notifications"
+                        style="display:none;">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Notification Settings
+                            </h3>
+
+                            <p>
+                                Control how you receive important updates.
+                            </p>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Email Notifications
+                                </strong>
+
+                                <span>
+                                    Receive important academic and system updates by email.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="emailNotifications"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Attendance Alerts
+                                </strong>
+
+                                <span>
+                                    Get notified when attendance records require attention.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Examination Updates
+                                </strong>
+
+                                <span>
+                                    Receive notifications about examination schedules and results.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    System Announcements
+                                </strong>
+
+                                <span>
+                                    Receive important announcements from administrators.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECURITY -->
+
+                    <div
+                        class="card settings-section"
+                        id="security"
+                        style="display:none;">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Security Settings
+                            </h3>
+
+                            <p>
+                                Protect your EduSphere account.
+                            </p>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Password
+                                </strong>
+
+                                <span>
+                                    Update your account password regularly for better security.
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="password-btn"
+                                onclick="changePassword()">
+                                Change Password
+                            </button>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Two-Factor Authentication
+                                </strong>
+
+                                <span>
+                                    Add an additional layer of security to your account.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Login Alerts
+                                </strong>
+
+                                <span>
+                                    Receive alerts whenever your account is accessed.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRIVACY -->
+
+                    <div
+                        class="card settings-section"
+                        id="privacy"
+                        style="display:none;">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Privacy Settings
+                            </h3>
+
+                            <p>
+                                Manage your account privacy preferences.
+                            </p>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Profile Visibility
+                                </strong>
+
+                                <span>
+                                    Allow other authorized users to view your profile.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Activity Status
+                                </strong>
+
+                                <span>
+                                    Show when you are active on the EduSphere platform.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Data Sharing
+                                </strong>
+
+                                <span>
+                                    Allow anonymous usage data to improve the platform.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DANGER ZONE -->
+
+                    <div class="card danger-card">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Danger Zone
+                            </h3>
+
+                            <p>
+                                These actions can affect your account.
+                            </p>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Sign Out From All Devices
+                                </strong>
+
+                                <span>
+                                    End all active EduSphere sessions.
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="danger-btn"
+                                onclick="signOutAll()">
+                                Sign Out All
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="save-area">
+
+                        <button
+                            class="save-btn"
+                            onclick="saveSettings()">
+                            Save Settings
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* ================= SECTION SWITCH ================= */
+
+    function showSection(sectionId, button) {
+
+        const sections =
+            document.querySelectorAll(".settings-section");
+
+        sections.forEach(function(section) {
+            section.style.display = "none";
+        });
+
+        document.getElementById(sectionId)
+            .style.display = "block";
+
+        const buttons =
+            document.querySelectorAll(".settings-menu button");
+
+        buttons.forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+    }
+
+
+    /* ================= SAVE SETTINGS ================= */
+
+    function saveSettings() {
+
+        localStorage.setItem(
+            "edusphereSettingsSaved",
+            "true"
+        );
+
+        alert(
+            "Settings saved successfully!"
+        );
+
+    }
+
+
+    /* ================= PASSWORD ================= */
+
+    function changePassword() {
+
+        const newPassword =
+            prompt("Enter your new password:");
+
+        if (!newPassword) {
+            return;
+        }
+
+        if (newPassword.length < 6) {
+
+            alert(
+                "Password must contain at least 6 characters."
+            );
+
+            return;
+        }
+
+        alert(
+            "Password updated successfully!"
+        );
+
+    }
+
+
+    /* ================= SIGN OUT ALL ================= */
+
+    function signOutAll() {
+
+        const confirmLogout =
+            confirm(
+                "Are you sure you want to sign out from all devices?"
+            );
+
+        if (!confirmLogout) {
+            return;
+        }
+
+        localStorage.clear();
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    function logout() {
+
+        if (
+            confirm(
+                "Are you sure you want to sign out?"
+            )
+        ) {
+
+            localStorage.removeItem(
+                "edusphereLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "edusphereUser"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

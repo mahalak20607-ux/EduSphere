@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Courses | EduSphere</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout button:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .profile span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* CONTENT */
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .page-heading p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #3730a3;
+        }
+
+        /* COURSE STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .stat span {
+            display: block;
+            color: #6b7280;
+            font-size: 9px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 22px;
+            margin-top: 4px;
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .search {
+            width: 280px;
+            position: relative;
+        }
+
+        .search span {
+            position: absolute;
+            left: 12px;
+            top: 9px;
+            color: #9ca3af;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 12px 10px 34px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            font-size: 10px;
+        }
+
+        .search input:focus {
+            border-color: #818cf8;
+        }
+
+        .filter {
+            padding: 9px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #4b5563;
+            font-size: 10px;
+            outline: none;
+        }
+
+        /* COURSE GRID */
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .course-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            overflow: hidden;
+            transition: .2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(15,23,42,.07);
+        }
+
+        .course-banner {
+            height: 105px;
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #6366f1
+            );
+            color: white;
+            padding: 18px;
+            position: relative;
+        }
+
+        .course-code {
+            font-size: 9px;
+            opacity: .75;
+        }
+
+        .course-banner h3 {
+            margin: 7px 0 0;
+            font-size: 17px;
+        }
+
+        .course-symbol {
+            position: absolute;
+            right: 18px;
+            top: 25px;
+            font-size: 30px;
+        }
+
+        .course-body {
+            padding: 18px;
+        }
+
+        .course-description {
+            color: #6b7280;
+            font-size: 9px;
+            line-height: 1.6;
+            min-height: 30px;
+        }
+
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+
+        .info-item span {
+            display: block;
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        .info-item strong {
+            display: block;
+            margin-top: 3px;
+            font-size: 10px;
+        }
+
+        .course-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress-text {
+            color: #4f46e5;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .view-btn {
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #4f46e5;
+            padding: 7px 11px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .view-btn:hover {
+            background: #eef2ff;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-direction: column;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div class="brand-name">EduSphere</div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html" class="active">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+        </nav>
+
+        <div class="menu-title">ACCOUNT</div>
+
+        <nav class="nav">
+
+            <a href="profile.html">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <button onclick="logout()">
+                ⇥ &nbsp; Sign Out
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Courses</h1>
+                <p>Manage academic courses and subjects</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Course Management</h2>
+
+                    <p>
+                        Browse and manage all courses available
+                        in EduSphere.
+                    </p>
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addCourse()">
+                    + Add Course
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon">📚</div>
+
+                    <span>Total Courses</span>
+
+                    <strong>48</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">🎓</div>
+
+                    <span>Active Courses</span>
+
+                    <strong>42</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">👨‍🎓</div>
+
+                    <span>Enrolled Students</span>
+
+                    <strong>1,250</strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-icon">👩‍🏫</div>
+
+                    <span>Faculty Assigned</span>
+
+                    <strong>86</strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="toolbar">
+
+                <div class="search">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search courses..."
+                    >
+
+                </div>
+
+
+                <select
+                    class="filter"
+                    id="departmentFilter">
+
+                    <option value="all">
+                        All Departments
+                    </option>
+
+                    <option value="Computer Science">
+                        Computer Science
+                    </option>
+
+                    <option value="Information Technology">
+                        Information Technology
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- COURSE GRID -->
+
+            <div class="course-grid" id="courseGrid">
+
+                <!-- COURSE 1 -->
+
+                <div
+                    class="course-card"
+                    data-department="Computer Science">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            CSC401
+                        </div>
+
+                        <h3>
+                            Artificial Intelligence
+                        </h3>
+
+                        <div class="course-symbol">
+                            🤖
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            Learn intelligent systems,
+                            machine learning and AI fundamentals.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>120</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>4</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Dr. Kumar</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                92% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Artificial Intelligence')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE 2 -->
+
+                <div
+                    class="course-card"
+                    data-department="Computer Science">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            CSC402
+                        </div>
+
+                        <h3>
+                            Data Structures
+                        </h3>
+
+                        <div class="course-symbol">
+                            💻
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            Explore algorithms,
+                            trees, graphs and advanced data structures.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>145</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>4</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Prof. Priya</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                88% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Data Structures')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE 3 -->
+
+                <div
+                    class="course-card"
+                    data-department="Computer Science">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            CSC403
+                        </div>
+
+                        <h3>
+                            Database Management
+                        </h3>
+
+                        <div class="course-symbol">
+                            🗄️
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            Database design, SQL,
+                            normalization and transaction management.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>132</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>4</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Prof. Arun</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                85% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Database Management')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE 4 -->
+
+                <div
+                    class="course-card"
+                    data-department="Computer Science">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            CSC404
+                        </div>
+
+                        <h3>
+                            Operating Systems
+                        </h3>
+
+                        <div class="course-symbol">
+                            🖥️
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            Processes, memory management,
+                            scheduling and file systems.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>118</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>3</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Dr. Meena</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                81% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Operating Systems')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE 5 -->
+
+                <div
+                    class="course-card"
+                    data-department="Information Technology">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            IT405
+                        </div>
+
+                        <h3>
+                            Web Technologies
+                        </h3>
+
+                        <div class="course-symbol">
+                            🌐
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            HTML, CSS, JavaScript and
+                            modern web application development.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>105</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>3</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Prof. Ravi</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                79% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Web Technologies')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE 6 -->
+
+                <div
+                    class="course-card"
+                    data-department="Electronics">
+
+                    <div class="course-banner">
+
+                        <div class="course-code">
+                            EC406
+                        </div>
+
+                        <h3>
+                            Computer Networks
+                        </h3>
+
+                        <div class="course-symbol">
+                            🌐
+                        </div>
+
+                    </div>
+
+                    <div class="course-body">
+
+                        <div class="course-description">
+                            Networking fundamentals,
+                            protocols, routing and network security.
+                        </div>
+
+                        <div class="course-info">
+
+                            <div class="info-item">
+                                <span>Students</span>
+                                <strong>98</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Credits</span>
+                                <strong>3</strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>Faculty</span>
+                                <strong>Dr. Suresh</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="course-footer">
+
+                            <span class="progress-text">
+                                76% Progress
+                            </span>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewCourse('Computer Networks')">
+                                View Course
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* ================= SEARCH & FILTER ================= */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const departmentFilter =
+        document.getElementById("departmentFilter");
+
+    function filterCourses() {
+
+        const search =
+            searchInput.value.toLowerCase();
+
+        const department =
+            departmentFilter.value;
+
+        const courses =
+            document.querySelectorAll(".course-card");
+
+        courses.forEach(function(course) {
+
+            const text =
+                course.textContent.toLowerCase();
+
+            const courseDepartment =
+                course.dataset.department;
+
+            const searchMatch =
+                text.includes(search);
+
+            const departmentMatch =
+                department === "all" ||
+                courseDepartment === department;
+
+            course.style.display =
+                searchMatch && departmentMatch
+                    ? ""
+                    : "none";
+
+        });
+    }
+
+    searchInput.addEventListener(
+        "input",
+        filterCourses
+    );
+
+    departmentFilter.addEventListener(
+        "change",
+        filterCourses
+    );
+
+
+    /* ================= VIEW COURSE ================= */
+
+    function viewCourse(courseName) {
+
+        alert(
+            "Course Details\n\n" +
+            "Course: " + courseName +
+            "\n\nCourse page will be connected here."
+        );
+
+    }
+
+
+    /* ================= ADD COURSE ================= */
+
+    function addCourse() {
+
+        alert(
+            "Add Course form will be connected here."
+        );
+
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    function logout() {
+
+        if (
+            confirm(
+                "Are you sure you want to sign out?"
+            )
+        ) {
+
+            localStorage.removeItem(
+                "edusphereLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "edusphereUser"
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

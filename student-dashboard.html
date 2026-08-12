@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | EduSphere</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout button:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .profile span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .welcome {
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            color: white;
+            border-radius: 16px;
+            padding: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .welcome small {
+            font-size: 10px;
+            opacity: .75;
+        }
+
+        .welcome h2 {
+            margin: 7px 0;
+            font-size: 25px;
+        }
+
+        .welcome p {
+            margin: 0;
+            font-size: 11px;
+            opacity: .75;
+        }
+
+        .student-avatar-large {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: rgba(255,255,255,.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 19px;
+        }
+
+        .stat-icon {
+            width: 37px;
+            height: 37px;
+            border-radius: 9px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 11px;
+        }
+
+        .stat-card span {
+            color: #6b7280;
+            font-size: 9px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .stat-card small {
+            color: #16a34a;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.45fr 1fr;
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            padding: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .card-header a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* ================= COURSES ================= */
+
+        .course {
+            padding: 13px 0;
+            border-bottom: 1px solid #f0f1f3;
+        }
+
+        .course:last-child {
+            border-bottom: none;
+        }
+
+        .course-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .course-name {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .course-mark {
+            font-size: 9px;
+            color: #4f46e5;
+            font-weight: 800;
+        }
+
+        .course-info {
+            color: #9ca3af;
+            font-size: 8px;
+            margin-bottom: 7px;
+        }
+
+        .progress {
+            height: 6px;
+            background: #eef0f3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: #4f46e5;
+            border-radius: inherit;
+        }
+
+        /* ================= ATTENDANCE ================= */
+
+        .attendance-circle {
+            width: 145px;
+            height: 145px;
+            margin: 10px auto 22px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4f46e5 0deg 345deg,
+                #e5e7eb 345deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attendance-inner {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .attendance-inner strong {
+            font-size: 27px;
+        }
+
+        .attendance-inner span {
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        .attendance-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .attendance-detail {
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .attendance-detail strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .attendance-detail span {
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        /* ================= SCHEDULE ================= */
+
+        .schedule {
+            margin-top: 18px;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid #f0f1f3;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .time {
+            width: 55px;
+            color: #4f46e5;
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .class-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .class-info strong {
+            display: block;
+            font-size: 10px;
+        }
+
+        .class-info span {
+            color: #9ca3af;
+            font-size: 8px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .student-avatar-large {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div class="brand-name">EduSphere</div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html" class="active">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+        </nav>
+
+        <div class="menu-title">ACCOUNT</div>
+
+        <nav class="nav">
+
+            <a href="profile.html">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+
+            <button onclick="logout()">
+                ⇥ &nbsp; Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Student Dashboard</h1>
+                <p>Your academic overview and progress</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">
+                    MA
+                </div>
+
+                <div>
+                    <strong>Maha</strong>
+                    <span>Student</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <div>
+
+                    <small>
+                        STUDENT PORTAL
+                    </small>
+
+                    <h2>
+                        Welcome back, Maha! 👋
+                    </h2>
+
+                    <p>
+                        Keep track of your courses, attendance
+                        and academic performance.
+                    </p>
+
+                </div>
+
+                <div class="student-avatar-large">
+                    MA
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📚
+                    </div>
+
+                    <span>Enrolled Courses</span>
+
+                    <strong>10</strong>
+
+                    <small>
+                        All courses active
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📊
+                    </div>
+
+                    <span>Attendance</span>
+
+                    <strong>94%</strong>
+
+                    <small>
+                        ↑ 2% this month
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🏆
+                    </div>
+
+                    <span>Average Score</span>
+
+                    <strong>86%</strong>
+
+                    <small>
+                        Good performance
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🎯
+                    </div>
+
+                    <span>Assignments</span>
+
+                    <strong>18/20</strong>
+
+                    <small>
+                        2 pending
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid">
+
+                <!-- COURSE PROGRESS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Course Progress
+                        </h3>
+
+                        <a href="courses.html">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="course">
+
+                        <div class="course-top">
+
+                            <span class="course-name">
+                                Artificial Intelligence
+                            </span>
+
+                            <span class="course-mark">
+                                92%
+                            </span>
+
+                        </div>
+
+                        <div class="course-info">
+                            CSC401 · 24 / 26 topics completed
+                        </div>
+
+                        <div class="progress">
+                            <span style="width:92%;"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="course">
+
+                        <div class="course-top">
+
+                            <span class="course-name">
+                                Data Structures
+                            </span>
+
+                            <span class="course-mark">
+                                88%
+                            </span>
+
+                        </div>
+
+                        <div class="course-info">
+                            CSC402 · 22 / 25 topics completed
+                        </div>
+
+                        <div class="progress">
+                            <span style="width:88%;"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="course">
+
+                        <div class="course-top">
+
+                            <span class="course-name">
+                                Database Management
+                            </span>
+
+                            <span class="course-mark">
+                                85%
+                            </span>
+
+                        </div>
+
+                        <div class="course-info">
+                            CSC403 · 20 / 24 topics completed
+                        </div>
+
+                        <div class="progress">
+                            <span style="width:85%;"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="course">
+
+                        <div class="course-top">
+
+                            <span class="course-name">
+                                Operating Systems
+                            </span>
+
+                            <span class="course-mark">
+                                81%
+                            </span>
+
+                        </div>
+
+                        <div class="course-info">
+                            CSC404 · 18 / 23 topics completed
+                        </div>
+
+                        <div class="progress">
+                            <span style="width:81%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATTENDANCE -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Attendance Overview
+                        </h3>
+
+                        <a href="attendance.html">
+                            Details →
+                        </a>
+
+                    </div>
+
+
+                    <div class="attendance-circle">
+
+                        <div class="attendance-inner">
+
+                            <strong>
+                                94%
+                            </strong>
+
+                            <span>
+                                Overall
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="attendance-details">
+
+                        <div class="attendance-detail">
+
+                            <strong>112</strong>
+
+                            <span>
+                                Present
+                            </span>
+
+                        </div>
+
+                        <div class="attendance-detail">
+
+                            <strong>7</strong>
+
+                            <span>
+                                Absent
+                            </span>
+
+                        </div>
+
+                        <div class="attendance-detail">
+
+                            <strong>119</strong>
+
+                            <span>
+                                Total
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TODAY'S SCHEDULE -->
+
+            <div class="card schedule">
+
+                <div class="card-header">
+
+                    <h3>
+                        Today's Schedule
+                    </h3>
+
+                    <span style="font-size:9px;color:#9ca3af;">
+                        Wednesday, 12 Aug 2026
+                    </span>
+
+                </div>
+
+
+                <div class="schedule-item">
+
+                    <div class="time">
+                        09:00
+                    </div>
+
+                    <div class="class-icon">
+                        🤖
+                    </div>
+
+                    <div class="class-info">
+
+                        <strong>
+                            Artificial Intelligence
+                        </strong>
+
+                        <span>
+                            Room 204 · Dr. Kumar
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="schedule-item">
+
+                    <div class="time">
+                        11:00
+                    </div>
+
+                    <div class="class-icon">
+                        💻
+                    </div>
+
+                    <div class="class-info">
+
+                        <strong>
+                            Data Structures
+                        </strong>
+
+                        <span>
+                            Lab 2 · Prof. Priya
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="schedule-item">
+
+                    <div class="time">
+                        14:00
+                    </div>
+
+                    <div class="class-icon">
+                        🗄️
+                    </div>
+
+                    <div class="class-info">
+
+                        <strong>
+                            Database Management
+                        </strong>
+
+                        <span>
+                            Room 106 · Prof. Arun
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="schedule-item">
+
+                    <div class="time">
+                        16:00
+                    </div>
+
+                    <div class="class-icon">
+                        🖥️
+                    </div>
+
+                    <div class="class-info">
+
+                        <strong>
+                            Operating Systems
+                        </strong>
+
+                        <span>
+                            Room 301 · Dr. Meena
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    function logout() {
+
+        if (
+            confirm(
+                "Are you sure you want to sign out?"
+            )
+        ) {
+
+            localStorage.removeItem(
+                "edusphereLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "edusphereUser"
+            );
+
+            window.location.href =
+                "login.html";
+        }
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students | EduSphere</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            inset: 0 auto 0 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .menu-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout button:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .profile span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .page-heading p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        .add-btn {
+            padding: 11px 17px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #3730a3;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .stat-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .stat span {
+            display: block;
+            color: #6b7280;
+            font-size: 9px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 21px;
+            margin-top: 4px;
+        }
+
+        /* ================= TABLE CARD ================= */
+
+        .table-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .table-toolbar {
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .search-box {
+            width: 270px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 12px 10px 35px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            font-size: 10px;
+        }
+
+        .search-box input:focus {
+            border-color: #818cf8;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 9px;
+            color: #9ca3af;
+        }
+
+        .filter-select {
+            padding: 9px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            color: #4b5563;
+            background: white;
+            font-size: 10px;
+            outline: none;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 13px 18px;
+            text-align: left;
+            background: #f8fafc;
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        td {
+            padding: 14px 18px;
+            border-top: 1px solid #f0f1f3;
+            font-size: 10px;
+            color: #4b5563;
+        }
+
+        .student {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .student-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .student-name strong {
+            display: block;
+            color: #111827;
+            font-size: 10px;
+        }
+
+        .student-name span {
+            display: block;
+            color: #9ca3af;
+            font-size: 8px;
+            margin-top: 2px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .active-status {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .inactive-status {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .action-btn {
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #4b5563;
+            padding: 6px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 9px;
+        }
+
+        .action-btn:hover {
+            border-color: #c7d2fe;
+            color: #4f46e5;
+        }
+
+        /* ================= PAGINATION ================= */
+
+        .pagination {
+            padding: 15px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eef0f3;
+        }
+
+        .pagination span {
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        .pages {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 9px;
+        }
+
+        .page-btn.active,
+        .page-btn:hover {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: white;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .table-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div class="brand-name">EduSphere</div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html" class="active">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+            <div class="menu-title">ACCOUNT</div>
+
+            <a href="profile.html">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <button onclick="logout()">
+                ⇥ &nbsp; Sign Out
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Students</h1>
+                <p>Manage and monitor student information</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Student Management</h2>
+                    <p>View, search and manage all registered students.</p>
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addStudent()">
+                    + Add Student
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon">👨‍🎓</div>
+
+                    <span>Total Students</span>
+
+                    <strong>1,250</strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">✓</div>
+
+                    <span>Active Students</span>
+
+                    <strong>1,186</strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">🎓</div>
+
+                    <span>New Admissions</span>
+
+                    <strong>124</strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">🏫</div>
+
+                    <span>Departments</span>
+
+                    <strong>08</strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-card">
+
+                <div class="table-toolbar">
+
+                    <div class="search-box">
+
+                        <span class="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search student name, ID or department..."
+                        >
+
+                    </div>
+
+
+                    <select
+                        class="filter-select"
+                        id="departmentFilter">
+
+                        <option value="all">
+                            All Departments
+                        </option>
+
+                        <option value="Computer Science">
+                            Computer Science
+                        </option>
+
+                        <option value="Information Technology">
+                            Information Technology
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Student</th>
+
+                                <th>Student ID</th>
+
+                                <th>Department</th>
+
+                                <th>Year</th>
+
+                                <th>Attendance</th>
+
+                                <th>Status</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="studentTable">
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="student">
+
+                                        <div class="student-avatar">
+                                            AK
+                                        </div>
+
+                                        <div class="student-name">
+                                            <strong>
+                                                Arjun Kumar
+                                            </strong>
+
+                                            <span>
+                                                arjun@example.com
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>ES2026001</td>
+
+                                <td>Computer Science</td>
+
+                                <td>III Year</td>
+
+                                <td>94%</td>
+
+                                <td>
+                                    <span class="status active-status">
+                                        Active
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="action-btn"
+                                        onclick="viewStudent('Arjun Kumar')">
+                                        View
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="student">
+
+                                        <div class="student-avatar">
+                                            PS
+                                        </div>
+
+                                        <div class="student-name">
+                                            <strong>
+                                                Priya Sharma
+                                            </strong>
+
+                                            <span>
+                                                priya@example.com
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>ES2026002</td>
+
+                                <td>Information Technology</td>
+
+                                <td>III Year</td>
+
+                                <td>97%</td>
+
+                                <td>
+                                    <span class="status active-status">
+                                        Active
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="action-btn"
+                                        onclick="viewStudent('Priya Sharma')">
+                                        View
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="student">
+
+                                        <div class="student-avatar">
+                                            RM
+                                        </div>
+
+                                        <div class="student-name">
+                                            <strong>
+                                                Rahul Menon
+                                            </strong>
+
+                                            <span>
+                                                rahul@example.com
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>ES2026003</td>
+
+                                <td>Computer Science</td>
+
+                                <td>II Year</td>
+
+                                <td>91%</td>
+
+                                <td>
+                                    <span class="status active-status">
+                                        Active
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="action-btn"
+                                        onclick="viewStudent('Rahul Menon')">
+                                        View
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="student">
+
+                                        <div class="student-avatar">
+                                            NS
+                                        </div>
+
+                                        <div class="student-name">
+                                            <strong>
+                                                Nisha Singh
+                                            </strong>
+
+                                            <span>
+                                                nisha@example.com
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>ES2026004</td>
+
+                                <td>Electronics</td>
+
+                                <td>IV Year</td>
+
+                                <td>88%</td>
+
+                                <td>
+                                    <span class="status active-status">
+                                        Active
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="action-btn"
+                                        onclick="viewStudent('Nisha Singh')">
+                                        View
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="student">
+
+                                        <div class="student-avatar">
+                                            VK
+                                        </div>
+
+                                        <div class="student-name">
+                                            <strong>
+                                                Vikram Kumar
+                                            </strong>
+
+                                            <span>
+                                                vikram@example.com
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>ES2026005</td>
+
+                                <td>Computer Science</td>
+
+                                <td>I Year</td>
+
+                                <td>96%</td>
+
+                                <td>
+                                    <span class="status inactive-status">
+                                        Inactive
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="action-btn"
+                                        onclick="viewStudent('Vikram Kumar')">
+                                        View
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PAGINATION -->
+
+                <div class="pagination">
+
+                    <span>
+                        Showing 1–5 of 1,250 students
+                    </span>
+
+                    <div class="pages">
+
+                        <button class="page-btn active">
+                            1
+                        </button>
+
+                        <button class="page-btn">
+                            2
+                        </button>
+
+                        <button class="page-btn">
+                            3
+                        </button>
+
+                        <button class="page-btn">
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* ================= SEARCH ================= */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const departmentFilter =
+        document.getElementById("departmentFilter");
+
+    function filterStudents() {
+
+        const search =
+            searchInput.value.toLowerCase();
+
+        const department =
+            departmentFilter.value;
+
+        const rows =
+            document.querySelectorAll(
+                "#studentTable tr"
+            );
+
+        rows.forEach(function(row) {
+
+            const text =
+                row.textContent.toLowerCase();
+
+            const departmentMatch =
+                department === "all" ||
+                row.children[2].textContent.trim()
+                    === department;
+
+            const searchMatch =
+                text.includes(search);
+
+            row.style.display =
+                searchMatch && departmentMatch
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+    searchInput.addEventListener(
+        "input",
+        filterStudents
+    );
+
+    departmentFilter.addEventListener(
+        "change",
+        filterStudents
+    );
+
+
+    /* ================= VIEW STUDENT ================= */
+
+    function viewStudent(name) {
+
+        alert(
+            "Student Profile\n\n" +
+            "Name: " + name
+        );
+
+    }
+
+
+    /* ================= ADD STUDENT ================= */
+
+    function addStudent() {
+
+        alert(
+            "Add Student form will be connected here."
+        );
+
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    function logout() {
+
+        if (
+            confirm(
+                "Are you sure you want to sign out?"
+            )
+        ) {
+
+            localStorage.removeItem(
+                "edusphereLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "edusphereUser"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

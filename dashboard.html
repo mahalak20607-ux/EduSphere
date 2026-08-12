@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | EduSphere</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 22px 15px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .brand span {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .sidebar-title {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 25px 10px 10px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            background: transparent;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .logout-btn:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            padding: 0 30px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar-title h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .topbar-title p {
+            margin: 3px 0 0;
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .notification-btn {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .user-info span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .welcome-card {
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            border-radius: 16px;
+            padding: 28px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .welcome-card span {
+            font-size: 10px;
+            opacity: .75;
+        }
+
+        .welcome-card h2 {
+            margin: 7px 0;
+            font-size: 25px;
+        }
+
+        .welcome-card p {
+            margin: 0;
+            font-size: 11px;
+            opacity: .75;
+        }
+
+        .welcome-icon {
+            width: 75px;
+            height: 75px;
+            border-radius: 18px;
+            background: rgba(255,255,255,.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+
+        .stat-card span {
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        .stat-card h3 {
+            margin: 9px 0 3px;
+            font-size: 23px;
+        }
+
+        .stat-card small {
+            color: #16a34a;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* ================= GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 13px;
+            padding: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .card-header a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* ================= PERFORMANCE ================= */
+
+        .performance-item {
+            margin-bottom: 18px;
+        }
+
+        .performance-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .performance-top span {
+            font-size: 10px;
+            color: #4b5563;
+        }
+
+        .performance-top strong {
+            font-size: 10px;
+        }
+
+        .progress {
+            height: 7px;
+            background: #eef0f3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: #4f46e5;
+            border-radius: inherit;
+        }
+
+        /* ================= ACTIVITY ================= */
+
+        .activity {
+            display: flex;
+            gap: 11px;
+            padding: 13px 0;
+            border-bottom: 1px solid #f0f1f3;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .activity strong {
+            display: block;
+            font-size: 10px;
+        }
+
+        .activity span {
+            display: block;
+            color: #9ca3af;
+            font-size: 9px;
+            margin-top: 3px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                width: 210px;
+                transform: translateX(-100%);
+                transition: .25s;
+            }
+
+            .sidebar.sidebar-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-card {
+                padding: 22px;
+            }
+
+            .welcome-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <span>EduSphere</span>
+        </div>
+
+        <div class="sidebar-title">
+            MAIN MENU
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html"
+               class="nav-link active">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="students.html"
+               class="nav-link">
+                <span class="nav-icon">👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="student-dashboard.html"
+               class="nav-link">
+                <span class="nav-icon">🎓</span>
+                Student Dashboard
+            </a>
+
+            <a href="courses.html"
+               class="nav-link">
+                <span class="nav-icon">📚</span>
+                Courses
+            </a>
+
+            <a href="attendance.html"
+               class="nav-link">
+                <span class="nav-icon">📊</span>
+                Attendance
+            </a>
+
+            <a href="marks.html"
+               class="nav-link">
+                <span class="nav-icon">📝</span>
+                Marks & Results
+            </a>
+
+            <a href="faculty.html"
+               class="nav-link">
+                <span class="nav-icon">👩‍🏫</span>
+                Faculty
+            </a>
+
+            <div class="sidebar-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html"
+               class="nav-link">
+                <span class="nav-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="settings.html"
+               class="nav-link">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-btn"
+                id="logoutBtn">
+                ⇥ &nbsp; Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Overview of your education management system
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification-btn"
+                    title="Notifications">
+                    🔔
+                </button>
+
+                <div class="user-info">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div>
+                        <strong id="userName">
+                            Admin User
+                        </strong>
+
+                        <span>
+                            Administrator
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+            <!-- WELCOME -->
+
+            <div class="welcome-card">
+
+                <div>
+
+                    <span>
+                        WELCOME BACK
+                    </span>
+
+                    <h2>
+                        Hello, Admin! 👋
+                    </h2>
+
+                    <p>
+                        Here's what's happening across
+                        EduSphere today.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+                    🎓
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+                            <span>
+                                Total Students
+                            </span>
+
+                            <h3>
+                                1,250
+                            </h3>
+
+                            <small>
+                                ↑ 8.2% this month
+                            </small>
+                        </div>
+
+                        <div class="stat-icon">
+                            👨‍🎓
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+                            <span>
+                                Total Courses
+                            </span>
+
+                            <h3>
+                                48
+                            </h3>
+
+                            <small>
+                                ↑ 4 new courses
+                            </small>
+                        </div>
+
+                        <div class="stat-icon">
+                            📚
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+                            <span>
+                                Attendance
+                            </span>
+
+                            <h3>
+                                96%
+                            </h3>
+
+                            <small>
+                                ↑ 2.4% this month
+                            </small>
+                        </div>
+
+                        <div class="stat-icon">
+                            📊
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+                            <span>
+                                Faculty Members
+                            </span>
+
+                            <h3>
+                                86
+                            </h3>
+
+                            <small>
+                                ↑ 3 new members
+                            </small>
+                        </div>
+
+                        <div class="stat-icon">
+                            👩‍🏫
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+                <!-- PERFORMANCE -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Academic Performance
+                        </h3>
+
+                        <a href="marks.html">
+                            View Results →
+                        </a>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-top">
+
+                            <span>
+                                Computer Science
+                            </span>
+
+                            <strong>
+                                92%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+                            <spam> style="width:92%;"></spam>
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-top">
+
+                            <span>
+                                Mathematics
+                            </span>
+
+                            <strong>
+                                86%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+                        <span> style="width:86%;"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-top">
+
+                            <span>
+                                Database Management
+                            </span>
+
+                            <strong>
+                                89%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+                            <span> style="width:89%;"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-top">
+
+                            <span>
+                                Operating Systems
+                            </span>
+
+                            <strong>
+                                82%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+                            <span>style="width:82%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT ACTIVITY -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Recent Activity
+                        </h3>
+
+                        <a href="#">
+                            View All
+                        </a>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            📝
+                        </div>
+
+                        <div>
+                            <strong>
+                                Marks updated
+                            </strong>
+
+                            <span>
+                                Computer Science · 10 min ago
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            📚
+                        </div>
+
+                        <div>
+                            <strong>
+                                New course added
+                            </strong>
+
+                            <span>
+                                Artificial Intelligence · 1 hour ago
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            📊
+                        </div>
+
+                        <div>
+                            <strong>
+                                Attendance updated
+                            </strong>
+
+                            <span>
+                                CSE Department · 2 hours ago
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">
+                            👨‍🎓
+                        </div>
+
+                        <div>
+                            <strong>
+                                New student registered
+                            </strong>
+
+                            <span>
+                                Student Management · Today
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* ===============================
+       LOAD USER
+       =============================== */
+
+    const savedUser =
+        localStorage.getItem("edusphereUser");
+
+    if (savedUser) {
+
+        try {
+
+            const user =
+                JSON.parse(savedUser);
+
+            const userName =
+                document.getElementById("userName");
+
+            if (userName && user.name) {
+                userName.textContent =
+                    user.name;
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load user:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* ===============================
+       LOGOUT
+       =============================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                const confirmLogout =
+                    confirm(
+                        "Are you sure you want to sign out?"
+                    );
+
+                if (!confirmLogout) {
+                    return;
+                }
+
+                localStorage.removeItem(
+                    "edusphereLoggedIn"
+                );
+
+                localStorage.removeItem(
+                    "edusphereUser"
+                );
+
+                localStorage.removeItem(
+                    "edusphereRemember"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+    /* ===============================
+       NOTIFICATIONS
+       =============================== */
+
+    document
+        .querySelector(".notification-btn")
+        .addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "You have 3 new notifications."
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
