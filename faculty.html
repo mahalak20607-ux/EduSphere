@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +19,6 @@
             color: #111827;
         }
 
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
         /* SIDEBAR */
         .sidebar {
             width: 245px;
@@ -39,7 +35,7 @@
             align-items: center;
             gap: 10px;
             padding: 0 10px 25px;
-            border-bottom: 1px solid rgba(255,255,255,.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .brand-icon {
@@ -82,6 +78,7 @@
             text-decoration: none;
             font-size: 11px;
             font-weight: 600;
+            transition: 0.2s;
         }
 
         .nav a:hover,
@@ -106,7 +103,7 @@
             width: 100%;
             padding: 10px;
             background: transparent;
-            border: 1px solid rgba(255,255,255,.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             color: #9ca3af;
             cursor: pointer;
@@ -311,12 +308,12 @@
             border: 1px solid #e5e7eb;
             border-radius: 13px;
             padding: 20px;
-            transition: .2s;
+            transition: 0.2s;
         }
 
         .faculty-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(15,23,42,.07);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
         }
 
         .faculty-top {
@@ -405,6 +402,7 @@
             background: #eef2ff;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 1100px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
@@ -518,7 +516,7 @@
             </a>
 
             <a href="settings.html">
-                <span class="nav-icon">⚙</span>
+                <span class="nav-icon">⚙️</span>
                 Settings
             </a>
 
@@ -582,50 +580,34 @@
             <div class="stats">
 
                 <div class="stat">
-
                     <div class="stat-icon">👩‍🏫</div>
-
                     <span>Total Faculty</span>
-
                     <strong>86</strong>
-
                 </div>
 
                 <div class="stat">
-
                     <div class="stat-icon">✓</div>
-
                     <span>Active Faculty</span>
-
                     <strong>82</strong>
-
                 </div>
 
                 <div class="stat">
-
                     <div class="stat-icon">🏢</div>
-
                     <span>Departments</span>
-
                     <strong>08</strong>
-
                 </div>
 
                 <div class="stat">
-
                     <div class="stat-icon">📚</div>
-
                     <span>Courses Assigned</span>
-
                     <strong>48</strong>
-
                 </div>
 
             </div>
 
 
             <!-- SEARCH / FILTER -->
-            < class="toolbar">
+            <div class="toolbar">
 
                 <div class="search">
 
@@ -641,7 +623,8 @@
 
             </select>
                     class="filter"
-                    id="departmentFilter">
+                    id="departmentFilter"
+                >
 
                     <option value="all">
                         All Departments
@@ -670,7 +653,8 @@
                 <!-- FACULTY 1 -->
                 <div
                     class="faculty-card"
-                    data-department="Computer Science">
+                    data-department="Computer Science"
+                >
 
                     <div class="faculty-top">
 
@@ -680,9 +664,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Dr. Kumar
-                            </h3>
+                            <h3>Dr. Kumar</h3>
 
                             <p>
                                 Professor • Computer Science
@@ -719,7 +701,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Dr. Kumar')">
+                            onclick="viewFaculty('Dr. Kumar')"
+                        >
                             View Profile
                         </button>
 
@@ -731,7 +714,8 @@
                 <!-- FACULTY 2 -->
                 <div
                     class="faculty-card"
-                    data-department="Computer Science">
+                    data-department="Computer Science"
+                >
 
                     <div class="faculty-top">
 
@@ -741,9 +725,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Prof. Priya
-                            </h3>
+                            <h3>Prof. Priya</h3>
 
                             <p>
                                 Associate Professor • CSE
@@ -780,7 +762,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Prof. Priya')">
+                            onclick="viewFaculty('Prof. Priya')"
+                        >
                             View Profile
                         </button>
 
@@ -792,7 +775,8 @@
                 <!-- FACULTY 3 -->
                 <div
                     class="faculty-card"
-                    data-department="Computer Science">
+                    data-department="Computer Science"
+                >
 
                     <div class="faculty-top">
 
@@ -802,9 +786,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Prof. Arun
-                            </h3>
+                            <h3>Prof. Arun</h3>
 
                             <p>
                                 Assistant Professor • CSE
@@ -841,7 +823,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Prof. Arun')">
+                            onclick="viewFaculty('Prof. Arun')"
+                        >
                             View Profile
                         </button>
 
@@ -853,7 +836,8 @@
                 <!-- FACULTY 4 -->
                 <div
                     class="faculty-card"
-                    data-department="Computer Science">
+                    data-department="Computer Science"
+                >
 
                     <div class="faculty-top">
 
@@ -863,9 +847,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Dr. Meena
-                            </h3>
+                            <h3>Dr. Meena</h3>
 
                             <p>
                                 Professor • Computer Science
@@ -902,7 +884,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Dr. Meena')">
+                            onclick="viewFaculty('Dr. Meena')"
+                        >
                             View Profile
                         </button>
 
@@ -914,7 +897,8 @@
                 <!-- FACULTY 5 -->
                 <div
                     class="faculty-card"
-                    data-department="Information Technology">
+                    data-department="Information Technology"
+                >
 
                     <div class="faculty-top">
 
@@ -924,9 +908,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Prof. Ravi
-                            </h3>
+                            <h3>Prof. Ravi</h3>
 
                             <p>
                                 Assistant Professor • IT
@@ -963,7 +945,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Prof. Ravi')">
+                            onclick="viewFaculty('Prof. Ravi')"
+                        >
                             View Profile
                         </button>
 
@@ -975,7 +958,8 @@
                 <!-- FACULTY 6 -->
                 <div
                     class="faculty-card"
-                    data-department="Electronics">
+                    data-department="Electronics"
+                >
 
                     <div class="faculty-top">
 
@@ -985,9 +969,7 @@
 
                         <div class="faculty-name">
 
-                            <h3>
-                                Dr. Suresh
-                            </h3>
+                            <h3>Dr. Suresh</h3>
 
                             <p>
                                 Professor • Electronics
@@ -1024,7 +1006,8 @@
 
                         <button
                             class="view-btn"
-                            onclick="viewFaculty('Dr. Suresh')">
+                            onclick="viewFaculty('Dr. Suresh')"
+                        >
                             View Profile
                         </button>
 
@@ -1054,7 +1037,7 @@
     function filterFaculty() {
 
         const search =
-            searchInput.value.toLowerCase();
+            searchInput.value.toLowerCase().trim();
 
         const department =
             departmentFilter.value;
@@ -1083,6 +1066,7 @@
                     : "none";
 
         });
+
     }
 
     searchInput.addEventListener(
@@ -1149,3 +1133,4 @@
 
 </body>
 </html>
+```
