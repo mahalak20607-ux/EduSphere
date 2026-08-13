@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <title>Faculty | EduSphere</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -19,33 +20,45 @@
             color: #111827;
         }
 
-        /* SIDEBAR */
+        /* ================= SIDEBAR ================= */
+
         .sidebar {
             width: 245px;
             min-height: 100vh;
+
             background: #111827;
             color: white;
+
             padding: 22px 15px;
+
             position: fixed;
             inset: 0 auto 0 0;
+
+            z-index: 10;
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
+
             padding: 0 10px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .brand-icon {
             width: 38px;
             height: 38px;
+
             border-radius: 10px;
+
             background: #4f46e5;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-weight: 800;
         }
 
@@ -56,9 +69,12 @@
 
         .menu-title {
             color: #6b7280;
+
             font-size: 9px;
             font-weight: 800;
+
             letter-spacing: 1px;
+
             margin: 25px 10px 10px;
         }
 
@@ -72,12 +88,18 @@
             display: flex;
             align-items: center;
             gap: 12px;
+
             padding: 11px 12px;
+
             border-radius: 8px;
+
             color: #9ca3af;
+
             text-decoration: none;
+
             font-size: 11px;
             font-weight: 600;
+
             transition: 0.2s;
         }
 
@@ -94,6 +116,7 @@
 
         .logout {
             position: absolute;
+
             left: 15px;
             right: 15px;
             bottom: 20px;
@@ -101,12 +124,19 @@
 
         .logout button {
             width: 100%;
+
             padding: 10px;
+
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
             border-radius: 8px;
+
             color: #9ca3af;
+
             cursor: pointer;
+
             font-size: 11px;
         }
 
@@ -115,18 +145,29 @@
             color: white;
         }
 
-        /* MAIN */
+
+        /* ================= MAIN ================= */
+
         .main {
             margin-left: 245px;
+
             width: calc(100% - 245px);
+
             min-height: 100vh;
         }
 
+
+        /* ================= TOPBAR ================= */
+
         .topbar {
             height: 72px;
+
             background: white;
+
             border-bottom: 1px solid #e5e7eb;
+
             padding: 0 30px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -139,7 +180,9 @@
 
         .topbar p {
             margin: 4px 0 0;
+
             color: #9ca3af;
+
             font-size: 10px;
         }
 
@@ -152,12 +195,17 @@
         .avatar {
             width: 36px;
             height: 36px;
+
             border-radius: 50%;
+
             background: #eef2ff;
+
             color: #4f46e5;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 11px;
             font-weight: 800;
         }
@@ -169,19 +217,25 @@
 
         .profile span {
             display: block;
+
             color: #9ca3af;
+
             font-size: 9px;
         }
 
-        /* CONTENT */
+
+        /* ================= CONTENT ================= */
+
         .content {
             padding: 30px;
         }
 
         .page-heading {
             display: flex;
+
             align-items: center;
             justify-content: space-between;
+
             margin-bottom: 22px;
         }
 
@@ -192,18 +246,26 @@
 
         .page-heading p {
             margin: 5px 0 0;
+
             color: #6b7280;
+
             font-size: 10px;
         }
 
         .add-btn {
             border: none;
+
             background: #4f46e5;
+
             color: white;
+
             padding: 11px 17px;
+
             border-radius: 8px;
+
             font-size: 10px;
             font-weight: 700;
+
             cursor: pointer;
         }
 
@@ -211,74 +273,107 @@
             background: #3730a3;
         }
 
-        /* STATS */
+
+        /* ================= STATS ================= */
+
         .stats {
             display: grid;
+
             grid-template-columns: repeat(4, 1fr);
+
             gap: 15px;
+
             margin-bottom: 22px;
         }
 
         .stat {
             background: white;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 12px;
+
             padding: 18px;
         }
 
         .stat-icon {
             width: 36px;
             height: 36px;
+
             border-radius: 9px;
+
             background: #eef2ff;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             margin-bottom: 10px;
         }
 
         .stat span {
             display: block;
+
             color: #6b7280;
+
             font-size: 9px;
         }
 
         .stat strong {
             display: block;
+
             font-size: 22px;
+
             margin-top: 4px;
         }
 
-        /* TOOLBAR */
+
+        /* ================= TOOLBAR ================= */
+
         .toolbar {
             background: white;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 12px;
+
             padding: 16px;
+
             display: flex;
+
             justify-content: space-between;
+
             gap: 15px;
+
             margin-bottom: 18px;
         }
 
         .search {
             width: 300px;
+
             position: relative;
         }
 
         .search span {
             position: absolute;
+
             left: 12px;
             top: 9px;
+
             color: #9ca3af;
         }
 
         .search input {
             width: 100%;
+
             padding: 10px 12px 10px 34px;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 8px;
+
             outline: none;
+
             font-size: 10px;
         }
 
@@ -288,63 +383,95 @@
 
         .filter {
             padding: 9px 12px;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 8px;
+
             background: white;
+
             color: #4b5563;
+
             font-size: 10px;
+
             outline: none;
+
+            cursor: pointer;
         }
 
-        /* FACULTY GRID */
+
+        /* ================= FACULTY GRID ================= */
+
         .faculty-grid {
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
+
             gap: 18px;
         }
 
         .faculty-card {
             background: white;
+
             border: 1px solid #e5e7eb;
+
             border-radius: 13px;
+
             padding: 20px;
+
             transition: 0.2s;
         }
 
         .faculty-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+
+            box-shadow:
+                0 10px 25px
+                rgba(15,23,42,0.07);
         }
 
         .faculty-top {
             display: flex;
+
             align-items: center;
+
             gap: 13px;
+
             padding-bottom: 16px;
+
             border-bottom: 1px solid #f0f1f3;
         }
 
         .faculty-avatar {
             width: 52px;
             height: 52px;
+
             border-radius: 50%;
+
             background: #eef2ff;
+
             color: #4f46e5;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-weight: 800;
+
             font-size: 15px;
         }
 
         .faculty-name h3 {
             margin: 0;
+
             font-size: 13px;
         }
 
         .faculty-name p {
             margin: 4px 0 0;
+
             color: #9ca3af;
+
             font-size: 9px;
         }
 
@@ -354,7 +481,9 @@
 
         .info-row {
             display: flex;
+
             justify-content: space-between;
+
             margin-bottom: 10px;
         }
 
@@ -364,37 +493,53 @@
 
         .info-row span {
             color: #9ca3af;
+
             font-size: 9px;
         }
 
         .info-row strong {
             font-size: 9px;
+
             color: #374151;
         }
 
         .faculty-footer {
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
         }
 
         .status {
             padding: 5px 9px;
+
             border-radius: 20px;
+
             background: #dcfce7;
+
             color: #15803d;
+
             font-size: 8px;
+
             font-weight: 700;
         }
 
         .view-btn {
             border: 1px solid #e5e7eb;
+
             background: white;
+
             color: #4f46e5;
+
             padding: 7px 11px;
+
             border-radius: 7px;
+
             cursor: pointer;
+
             font-size: 9px;
+
             font-weight: 700;
         }
 
@@ -402,8 +547,34 @@
             background: #eef2ff;
         }
 
-        /* RESPONSIVE */
+
+        /* ================= NO RESULTS ================= */
+
+        .no-results {
+            display: none;
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 50px;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 1100px) {
+
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -411,15 +582,19 @@
             .faculty-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
+
         @media (max-width: 750px) {
+
             .sidebar {
                 display: none;
             }
 
             .main {
                 margin-left: 0;
+
                 width: 100%;
             }
 
@@ -446,26 +621,46 @@
 
             .page-heading {
                 align-items: flex-start;
+
                 flex-direction: column;
+
                 gap: 15px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="layout">
 
-    <!-- SIDEBAR -->
+
+    <!-- ================= SIDEBAR ================= -->
+
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-icon">E</div>
-            <div class="brand-name">EduSphere</div>
+
+            <div class="brand-icon">
+                E
+            </div>
+
+            <div class="brand-name">
+                EduSphere
+            </div>
+
         </div>
 
-        <div class="menu-title">MAIN MENU</div>
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
 
         <nav class="nav">
 
@@ -506,7 +701,11 @@
 
         </nav>
 
-        <div class="menu-title">ACCOUNT</div>
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
 
         <nav class="nav">
 
@@ -522,32 +721,57 @@
 
         </nav>
 
+
         <div class="logout">
+
             <button onclick="logout()">
                 ⇥ &nbsp; Sign Out
             </button>
+
         </div>
 
     </aside>
 
 
-    <!-- MAIN -->
+
+    <!-- ================= MAIN ================= -->
+
     <main class="main">
+
+
+        <!-- TOPBAR -->
 
         <header class="topbar">
 
             <div>
-                <h1>Faculty</h1>
-                <p>Manage faculty members and academic staff</p>
+
+                <h1>
+                    Faculty
+                </h1>
+
+                <p>
+                    Manage faculty members and academic staff
+                </p>
+
             </div>
+
 
             <div class="profile">
 
-                <div class="avatar">A</div>
+                <div class="avatar">
+                    A
+                </div>
 
                 <div>
-                    <strong>Admin User</strong>
-                    <span>Administrator</span>
+
+                    <strong>
+                        Admin User
+                    </strong>
+
+                    <span>
+                        Administrator
+                    </span>
+
                 </div>
 
             </div>
@@ -555,63 +779,127 @@
         </header>
 
 
+
+        <!-- CONTENT -->
+
         <section class="content">
 
+
             <!-- PAGE HEADING -->
+
             <div class="page-heading">
 
                 <div>
-                    <h2>Faculty Management</h2>
+
+                    <h2>
+                        Faculty Management
+                    </h2>
 
                     <p>
                         View faculty profiles, departments,
                         courses and teaching information.
                     </p>
+
                 </div>
 
-                <button class="add-btn" onclick="addFaculty()">
+
+                <button
+                    class="add-btn"
+                    onclick="addFaculty()"
+                >
                     + Add Faculty
                 </button>
 
             </div>
 
 
-            <!-- STATS -->
+
+            <!-- ================= STATS ================= -->
+
             <div class="stats">
 
-                <div class="stat">
-                    <div class="stat-icon">👩‍🏫</div>
-                    <span>Total Faculty</span>
-                    <strong>86</strong>
-                </div>
 
                 <div class="stat">
-                    <div class="stat-icon">✓</div>
-                    <span>Active Faculty</span>
-                    <strong>82</strong>
+
+                    <div class="stat-icon">
+                        👩‍🏫
+                    </div>
+
+                    <span>
+                        Total Faculty
+                    </span>
+
+                    <strong>
+                        86
+                    </strong>
+
                 </div>
 
-                <div class="stat">
-                    <div class="stat-icon">🏢</div>
-                    <span>Departments</span>
-                    <strong>08</strong>
-                </div>
 
                 <div class="stat">
-                    <div class="stat-icon">📚</div>
-                    <span>Courses Assigned</span>
-                    <strong>48</strong>
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+
+                    <span>
+                        Active Faculty
+                    </span>
+
+                    <strong>
+                        82
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        🏢
+                    </div>
+
+                    <span>
+                        Departments
+                    </span>
+
+                    <strong>
+                        08
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        📚
+                    </div>
+
+                    <span>
+                        Courses Assigned
+                    </span>
+
+                    <strong>
+                        48
+                    </strong>
+
                 </div>
 
             </div>
 
 
-            <!-- SEARCH / FILTER -->
+
+            <!-- ================= TOOLBAR ================= -->
+
             <div class="toolbar">
+
 
                 <div class="search">
 
-                    <span>🔍</span>
+                    <span>
+                        🔍
+                    </span>
 
                     <input
                         type="text"
@@ -621,7 +909,8 @@
 
                 </div>
 
-            </select>
+
+                <select>
                     class="filter"
                     id="departmentFilter"
                 >
@@ -647,10 +936,17 @@
             </div>
 
 
-            <!-- FACULTY CARDS -->
-            <div class="faculty-grid" id="facultyGrid">
+
+            <!-- ================= FACULTY GRID ================= -->
+
+            <div
+                class="faculty-grid"
+                id="facultyGrid"
+            >
+
 
                 <!-- FACULTY 1 -->
+
                 <div
                     class="faculty-card"
                     data-department="Computer Science"
@@ -664,7 +960,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Dr. Kumar</h3>
+                            <h3>
+                                Dr. Kumar
+                            </h3>
 
                             <p>
                                 Professor • Computer Science
@@ -674,24 +972,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC001</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC001
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>12 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>AI, ML</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                12 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                AI, ML
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -711,7 +1034,9 @@
                 </div>
 
 
+
                 <!-- FACULTY 2 -->
+
                 <div
                     class="faculty-card"
                     data-department="Computer Science"
@@ -725,7 +1050,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Prof. Priya</h3>
+                            <h3>
+                                Prof. Priya
+                            </h3>
 
                             <p>
                                 Associate Professor • CSE
@@ -735,24 +1062,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC002</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC002
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>9 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>DS, Algorithms</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                9 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                DS, Algorithms
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -772,7 +1124,9 @@
                 </div>
 
 
+
                 <!-- FACULTY 3 -->
+
                 <div
                     class="faculty-card"
                     data-department="Computer Science"
@@ -786,7 +1140,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Prof. Arun</h3>
+                            <h3>
+                                Prof. Arun
+                            </h3>
 
                             <p>
                                 Assistant Professor • CSE
@@ -796,24 +1152,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC003</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC003
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>7 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>DBMS, SQL</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                7 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                DBMS, SQL
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -833,7 +1214,9 @@
                 </div>
 
 
+
                 <!-- FACULTY 4 -->
+
                 <div
                     class="faculty-card"
                     data-department="Computer Science"
@@ -847,7 +1230,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Dr. Meena</h3>
+                            <h3>
+                                Dr. Meena
+                            </h3>
 
                             <p>
                                 Professor • Computer Science
@@ -857,24 +1242,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC004</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC004
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>14 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>OS, Systems</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                14 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                OS, Systems
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -894,7 +1304,9 @@
                 </div>
 
 
+
                 <!-- FACULTY 5 -->
+
                 <div
                     class="faculty-card"
                     data-department="Information Technology"
@@ -908,7 +1320,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Prof. Ravi</h3>
+                            <h3>
+                                Prof. Ravi
+                            </h3>
 
                             <p>
                                 Assistant Professor • IT
@@ -918,24 +1332,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC005</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC005
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>6 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>Web Technology</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                6 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                Web Technology
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -955,7 +1394,9 @@
                 </div>
 
 
+
                 <!-- FACULTY 6 -->
+
                 <div
                     class="faculty-card"
                     data-department="Electronics"
@@ -969,7 +1410,9 @@
 
                         <div class="faculty-name">
 
-                            <h3>Dr. Suresh</h3>
+                            <h3>
+                                Dr. Suresh
+                            </h3>
 
                             <p>
                                 Professor • Electronics
@@ -979,24 +1422,49 @@
 
                     </div>
 
+
                     <div class="faculty-info">
 
                         <div class="info-row">
-                            <span>Employee ID</span>
-                            <strong>FAC006</strong>
+
+                            <span>
+                                Employee ID
+                            </span>
+
+                            <strong>
+                                FAC006
+                            </strong>
+
                         </div>
 
-                        <div class="info-row">
-                            <span>Experience</span>
-                            <strong>15 Years</strong>
-                        </div>
 
                         <div class="info-row">
-                            <span>Courses</span>
-                            <strong>Networks</strong>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                15 Years
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Courses
+                            </span>
+
+                            <strong>
+                                Networks
+                            </strong>
+
                         </div>
 
                     </div>
+
 
                     <div class="faculty-footer">
 
@@ -1015,6 +1483,17 @@
 
                 </div>
 
+
+
+                <!-- NO RESULTS -->
+
+                <div
+                    class="no-results"
+                    id="noResults"
+                >
+                    No faculty members found.
+                </div>
+
             </div>
 
         </section>
@@ -1024,9 +1503,12 @@
 </div>
 
 
+
 <script>
 
-    /* SEARCH + FILTER */
+    /* =========================
+       SEARCH
+    ========================= */
 
     const searchInput =
         document.getElementById("searchInput");
@@ -1034,45 +1516,81 @@
     const departmentFilter =
         document.getElementById("departmentFilter");
 
+    const facultyCards =
+        document.querySelectorAll(".faculty-card");
+
+    const noResults =
+        document.getElementById("noResults");
+
+
     function filterFaculty() {
 
         const search =
-            searchInput.value.toLowerCase().trim();
+            searchInput.value
+                .toLowerCase()
+                .trim();
 
         const department =
             departmentFilter.value;
 
-        const facultyCards =
-            document.querySelectorAll(".faculty-card");
+        let visibleCount = 0;
+
 
         facultyCards.forEach(function(card) {
 
             const text =
-                card.textContent.toLowerCase();
+                card.textContent
+                    .toLowerCase();
 
             const cardDepartment =
                 card.dataset.department;
 
+
             const searchMatch =
                 text.includes(search);
+
 
             const departmentMatch =
                 department === "all" ||
                 cardDepartment === department;
 
-            card.style.display =
-                searchMatch && departmentMatch
-                    ? ""
-                    : "none";
+
+            if (
+                searchMatch &&
+                departmentMatch
+            ) {
+
+                card.style.display = "";
+
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
 
         });
 
+
+        if (visibleCount === 0) {
+
+            noResults.style.display = "block";
+
+        } else {
+
+            noResults.style.display = "none";
+
+        }
+
     }
+
 
     searchInput.addEventListener(
         "input",
         filterFaculty
     );
+
 
     departmentFilter.addEventListener(
         "change",
@@ -1080,39 +1598,52 @@
     );
 
 
-    /* VIEW PROFILE */
+
+    /* =========================
+       VIEW FACULTY
+    ========================= */
 
     function viewFaculty(name) {
 
         alert(
             "Faculty Profile\n\n" +
             "Name: " + name +
-            "\n\nDetailed faculty profile will be connected here."
+            "\n\n" +
+            "Detailed faculty profile will be available here."
         );
 
     }
 
 
-    /* ADD FACULTY */
+
+    /* =========================
+       ADD FACULTY
+    ========================= */
 
     function addFaculty() {
 
         alert(
-            "Add Faculty form will be connected here."
+            "Add Faculty\n\n" +
+            "Faculty registration form will be available here."
         );
 
     }
 
 
-    /* LOGOUT */
+
+    /* =========================
+       LOGOUT
+    ========================= */
 
     function logout() {
 
-        if (
+        const confirmLogout =
             confirm(
                 "Are you sure you want to sign out?"
-            )
-        ) {
+            );
+
+
+        if (confirmLogout) {
 
             localStorage.removeItem(
                 "edusphereLoggedIn"
@@ -1121,6 +1652,11 @@
             localStorage.removeItem(
                 "edusphereUser"
             );
+
+            localStorage.removeItem(
+                "edusphereRemember"
+            );
+
 
             window.location.href =
                 "login.html";
@@ -1131,6 +1667,6 @@
 
 </script>
 
+
 </body>
 </html>
-```
